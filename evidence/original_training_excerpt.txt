@@ -1,0 +1,27 @@
+100 epochs completed in 6.401 hours.
+Optimizer stripped from /kaggle/working/runs/detect/train/weights/last.pt, 51.2MB
+Optimizer stripped from /kaggle/working/runs/detect/train/weights/best.pt, 51.2MB
+
+Validating /kaggle/working/runs/detect/train/weights/best.pt...
+Ultralytics 8.3.237 🚀 Python-3.11.13 torch-2.6.0+cu124 CUDA:0 (Tesla P100-PCIE-16GB, 16269MiB)
+YOLO11l summary (fused): 190 layers, 25,290,877 parameters, 0 gradients, 86.6 GFLOPs
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 32/32 1.7it/s 18.5s0.6s
+                   all       1001       1891       0.85       0.75      0.816      0.534
+                  Mask         77         90      0.976       0.46      0.801      0.643
+                   can         18         20      0.829       0.75      0.825      0.398
+             cellphone         61         71      0.988      0.972      0.984      0.885
+           electronics         27         40      0.898      0.725      0.813      0.501
+               gbottle         36         82       0.76      0.734      0.781      0.614
+                 glove         37         55      0.897        0.8      0.887      0.764
+                 metal         10         22      0.597      0.409      0.447      0.236
+                  misc         48         51      0.625      0.786      0.681        0.4
+                   net        146        148      0.951      0.909      0.956      0.731
+                  pbag        290        330       0.91      0.985      0.974      0.856
+               pbottle        122        284       0.86      0.796      0.852       0.52
+               plastic         51         59      0.825      0.719      0.803      0.317
+                   rod          7          9      0.911      0.556      0.673      0.296
+            sunglasses          3          3       0.88          1      0.995      0.502
+                  tire        143        627      0.837      0.644      0.764      0.343
+Speed: 0.2ms preprocess, 15.3ms inference, 0.0ms loss, 0.9ms postprocess per image
+Results saved to /kaggle/working/runs/detect/train
+💡 Learn more at https://docs.ultralytics.com/modes/train
