@@ -2,7 +2,7 @@
 
 **Python · Ultralytics YOLO11l · Fine-tuning · 15-class object detection · Kaggle**
 
-A multi-class underwater-debris detection project originally developed in a private Kaggle notebook in 2025. This repository is a cleaned and documented portfolio presentation assembled in November 2026. The 2025 Kaggle version history is preserved privately and can be checked on request.
+A multi-class underwater-debris detection project originally developed in a private Kaggle notebook in 2025. This repository is a cleaned and documented portfolio presentation assembled in November 2026. The original Kaggle notebook is preserved privately; its dated history and outputs can be made available for verification on request.
 
 The original experiment **fine-tuned an existing object-detection checkpoint** for 100 epochs. It did not train a detector from scratch.
 
@@ -51,13 +51,9 @@ The complete machine-readable table is in [`evidence/historical_validation_per_c
 
 ## Model inference examples — November 2026
 
-I loaded the archived Kaggle model `mohamedselimoueslati/underwater` and ran inference on underwater images in November 2026. The examples included detections labelled `pbag`, `pbottle`, and `glove`. One image also appears to show a fish labelled `pbag`, illustrating a possible false positive. These are **illustrative predictions, not an independent performance assessment**.
+I loaded the archived Kaggle model `mohamedselimoueslati/underwater` and ran inference on underwater images in November 2026. The examples included detections labelled `pbag`, `pbottle`, and `glove`. These are **illustrative predictions, not an independent performance assessment**.
 
-**Checkpoint provenance remains to be confirmed:** the archived model may be the starting checkpoint rather than the final checkpoint of the 100-epoch run. The historical scores above must not be attributed to this inference checkpoint unless they are shown to be the same model.
-
-Some test photographs contain third-party stock-photo watermarks. Their annotated versions have deliberately **not been placed in this public repository**. Publish prediction screenshots only when the underlying images can lawfully be redistributed.
-
-<!-- When rights are verified, save a real annotated screenshot to assets/predictions.jpg and add: ![Underwater waste detections](assets/predictions.jpg) -->
+Some test photographs contain third-party stock-photo watermarks. Their annotated versions have deliberately **not been placed in this public repository**.
 
 ## How to reproduce
 
@@ -92,22 +88,50 @@ Inference outputs are written to `/kaggle/working/underwater_predictions/`. The 
 - Some qualitative inference images show potential category mistakes; model confidence is not ground-truth correctness.
 - The original notebook includes an incomplete SAM2 attempt, but **no successful segmentation experiment is claimed here**.
 - A later exploratory evaluation cell used the training split despite being described as a test. **No independent test results are claimed.**
-- The exact saved model's relationship to the final 100-epoch checkpoint still needs confirmation.
 
-## Dataset, model and project history
+## Datasets and attribution
 
-**Still required before public release:** add the exact original dataset author's name, source URL, version, and any restrictions on training or redistribution. Verify the origin and redistribution terms of the starting and final model checkpoints. This repository does not include source photos or model weights.
+### Dataset used for the reported training and validation
 
-The original private Kaggle notebook and saved version history are available for verification on request: **mohamedselim.oueslati@insat.ucar.tn**. The 2025 version dates should be confirmed directly in Kaggle before quoting a specific day.
+**[Underwater Plastic Pollution Detection](https://www.kaggle.com/datasets/arnavs19/underwater-plastic-pollution-detection)** — Kaggle listing under `arnavs19`. The original notebook explicitly fine-tuned the checkpoint using:
 
-**Project evidence**
+```text
+/kaggle/input/underwater-plastic-pollution-detection/underwater_plastics/data.yaml
+```
 
-- [`evidence/original_training_excerpt.txt`](evidence/original_training_excerpt.txt) — original final run summary and validation table
-- [`evidence/historical_validation_per_class.csv`](evidence/historical_validation_per_class.csv) — extracted numbers used for the chart
-- `assets/per_class_validation.png` — chart derived from the historical validation table (created for this README in November 2026)
+This dataset has 15 object classes and is reported as containing 3,628 training images, 1,001 validation images and 501 test images. The reported metrics in this repository are from the 1,001-image **validation** split. An independent [dataset analysis](https://github.com/mchianale/Plastic-Pollution-Detection) describes the collection as derived from an Ocean Waste dataset on Roboflow, but the precise upstream Roboflow project/version and underlying photographic rights have not been independently verified.
+
+**Attribution:** dataset distributed on Kaggle under the listing _Underwater Plastic Pollution Detection_ (`arnavs19`). The Kaggle dataset's exact license and upstream photo permissions should be checked at the source before reusing or redistributing the images. **No dataset photos, annotations or model weights are redistributed in this repository.**
+
+### Other Kaggle inputs present in the original research notebook
+
+These entries appeared as Kaggle inputs or in exploratory cells. **They were not used by the successful 100-epoch command whose validation results are reported above.**
+
+| Input name                           | Source / role in the original notebook                                                                                                                                                                                                                                                                                                                                                                                  |
+| ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **RealOcean Garbage** (`FinalOcean`) | [RealOcean Garbage — Aman Kamath, Kaggle](https://www.kaggle.com/datasets/amankamath/realocean-garbage). A later cell references `FinalOcean/OceanGarbage/Images` when exploring a different training setup. The dataset listing shows an MIT license, but verify the image-level reuse rights separately. No completed result from this branch is claimed.                                                             |
+| **Underwater Trash Detection**       | [Underwater Trash Detection — Kaggle listing by `shivamb`](https://www.kaggle.com/datasets/shivamb/underwater-trash-detection), a copy of the [Trash-ICRA19 dataset](https://doi.org/10.13020/x0qn-y082) created by Michael S. Fulton, Jungseok Hong and Junaed Sattar, with imagery originally sourced from J-EDI/JAMSTEC. It was among the attached Kaggle inputs; the documented completed run does not train on it. |
+| **The YAML / `the-yaml`**            | Auxiliary `data.yaml` referenced in an unfinished or unverified training attempt. Its uploader, configuration contents, and relationship to the datasets cannot be established from the preserved notebook alone.                                                                                                                                                                                                       |
+| **`thedata` / “yamles”**             | Other YAML/configuration inputs associated with separate exploratory training commands.                                                                                                                                                                                                                                                                                                                                 |
+
+The auxiliary YAML files **define dataset paths and class mappings**.
+
+### Model, code and project history
+
+The historical command started from `/kaggle/input/underwater/other/default/1/best.pt` and ran 100 epochs. The original logs establish the recorded training and validation metrics. A saved Kaggle model is available at `mohamedselimoueslati/underwater`.
+Ultralytics YOLO is a third-party dependency with its own licensing terms; this repository does not redistribute Ultralytics source code or trained weights. This project is a cleaned **2026 documentation of earlier 2025 experiments**, not a claim of training anew in 2026.
+
+The original private Kaggle notebook and saved history are available for verification by request at **selimoueslati0@gmail.com**. The exact notebook version dates must be confirmed in Kaggle before citing a specific training date.
+
+**Project evidence:**
+
+- [`evidence/original_training_excerpt.txt`](evidence/original_training_excerpt.txt) — preserved final run summary and validation table
+- [`evidence/historical_validation_per_class.csv`](evidence/historical_validation_per_class.csv) — values used to generate the per-class chart
+- [`assets/per_class_validation.png`](assets/per_class_validation.png) — visualization derived from that historical table in November 2026
+- [`assets/kaggle_model_created.png`](assets/kaggle_model_created.png) — historical **model listing**, not proof of which checkpoint was saved
 
 ### Saved model listing — historical evidence
 
-![Private Kaggle saved-model page](assets/kaggle_model_created.png)
+![Archived Kaggle model listing](assets/kaggle_model_created.png)
 
-The screenshot shows the Kaggle **model** `mohamedselimoueslati/underwater`, with a displayed creation date of December 11, 2025. This supports the model's existence at that time; **it does not establish the date of the notebook's completed 100-epoch training run or prove that the model is the final fine-tuned checkpoint.** Those must be verified separately against the original Kaggle saved versions and checkpoint metadata.
+The screenshot shows the Kaggle **model** `mohamedselimoueslati/underwater`, with a displayed creation date of December 11, 2025.
